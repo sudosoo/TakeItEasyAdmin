@@ -12,5 +12,4 @@ class TakeItEasyAdminApplication
 
 fun main() {
     runApplication<TakeItEasyAdminApplication>()
-
 }
