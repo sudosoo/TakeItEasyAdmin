@@ -18,11 +18,13 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter", "junit-jupiter", "5.6.2")
+    testImplementation("io.mockk:mockk:1.12.5")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     //로그 의존성
@@ -30,6 +32,10 @@ dependencies {
 
     //Spring Data 의존성
     implementation("org.springframework.data:spring-data-envers")
+
+
+    //kafka
+    implementation ("org.springframework.kafka:spring-kafka")
 
     //h2
     runtimeOnly("com.h2database:h2")
