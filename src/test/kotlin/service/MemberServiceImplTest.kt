@@ -3,7 +3,6 @@ package service
 import com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
 import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
 import com.sudosoo.takeItEasyAdmin.entity.Member
-import com.sudosoo.takeItEasyAdmin.kafka.KafkaApi
 import com.sudosoo.takeItEasyAdmin.repository.MemberRepository
 import com.sudosoo.takeItEasyAdmin.service.MemberService
 import com.sudosoo.takeItEasyAdmin.service.MemberServiceImpl
@@ -15,9 +14,7 @@ import java.util.*
 
 class MemberServiceImplTest {
     private val memberRepository: MemberRepository = mockk<MemberRepository>()
-    private val kafkaApi: KafkaApi = mockk<KafkaApi>()
-    private val memberService: MemberService = MemberServiceImpl(memberRepository, kafkaApi)
-
+    private val memberService: MemberService = MemberServiceImpl(memberRepository)
     private val createMemberRequestDto = CreateMemberRequestDto("testMember")
     private val member = Member.of(createMemberRequestDto)
 
@@ -25,7 +22,7 @@ class MemberServiceImplTest {
     @DisplayName("createMember")
     fun create() {
         //given
-        every { memberRepository.existByMemberName(any()) } returns false
+        every { memberRepository.existsByMemberName(any()) } returns false
         every { memberRepository.save(member) } returns member
 
         //when
@@ -46,7 +43,6 @@ class MemberServiceImplTest {
         //given
         val requestDto = GetMemberRequestDto(1L)
         every { memberRepository.findById(requestDto.memberId) } returns Optional.of(member)
-        every { kafkaApi.sendMember(member) } just Runs
 
         //when
         val result = memberService.getInstance(requestDto)
@@ -54,7 +50,6 @@ class MemberServiceImplTest {
         //then
         assertNotNull(result)
         verify(exactly = 1) { memberRepository.findById(1L) }
-        verify(exactly = 1) { kafkaApi.sendMember(member) }
     }
 
     @Test

@@ -2,7 +2,6 @@ package com.sudosoo.takeItEasyAdmin.controller
 
 import com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
 import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
-import com.sudosoo.takeItEasyAdmin.entity.Member
 import com.sudosoo.takeItEasyAdmin.service.MemberService
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
