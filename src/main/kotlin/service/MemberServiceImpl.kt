@@ -23,10 +23,8 @@ class MemberServiceImpl (
         return memberRepository.save(Member.of(createMemberRequestDto))
     }
 
-    override fun getInstance(getMemberRequestDto: GetMemberRequestDto) : Member {
-        val member = memberRepository.findById(getMemberRequestDto.memberId).orElseThrow{NoSuchElementException("멤버를 찾을 수 없습니다.") }
-        kafkaApi.sendMember(member)
-        return member
+    override fun getInstance(getRequestDto: GetMemberRequestDto) : Member {
+        return memberRepository.findById(getRequestDto.memberId).orElseThrow{ NoSuchElementException(" 멤버를 찾을 수 없습니다.") }
         }
 
     override fun disableByMemberId(memberId: Long) {
@@ -44,6 +42,5 @@ class MemberServiceImpl (
 //        return memberRepository.findAll()
 //    }
 //
-
 }
 

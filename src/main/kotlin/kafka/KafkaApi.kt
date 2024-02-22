@@ -1,8 +1,8 @@
 package com.sudosoo.takeItEasyAdmin.kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.dto.RequestMessage
-import com.sudosoo.takeItEasyAdmin.entity.Member
+import com.sudosoo.takeItEasyAdmin.dto.CreatePostByResponseDto
+import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
 import com.sudosoo.takeItEasyAdmin.service.MemberService
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.annotation.KafkaListener
@@ -18,22 +18,24 @@ class KafkaApi(
     val objectMapper : ObjectMapper,
     val memberService: MemberService
 ) {
-    fun sendMember(producerMember : Member) {
-        kafkaTemplate.send(kafkaRestApiTopic, producerMember)
+    fun sendMember(createPostByResponseDto: CreatePostByResponseDto) {
+        kafkaTemplate.send(kafkaRestApiTopic, createPostByResponseDto)
     }
 
     @KafkaListener(topics = ["\${devsoo.kafka.restapi.topic}"], groupId = "member-consumer")
     fun getMemberRequestDto(message: String) {
 
-        val requestMessage: RequestMessage = objectMapper.readValue(message, RequestMessage::class.java)
+        val getMemberRequestDto: GetMemberRequestDto = objectMapper.readValue(message, GetMemberRequestDto::class.java)
 
-        when (requestMessage.targetMethod) {
-            "getInstance" -> {
-                val currentTimeMillis = System.currentTimeMillis()
-                println("Current time in milliseconds: $currentTimeMillis")
+        when (getMemberRequestDto.targetMethod) {
+            "validateMemberId" -> {
+                val member = memberService.getInstance(getMemberRequestDto)
+                val responseDto = member.id?.let { CreatePostByResponseDto(it,member.memberName) }
+                    ?: throw IllegalStateException("Failed to create responseDto")
+                sendMember(responseDto)
             }
             else -> {
-
+                throw IllegalStateException("target is null")
             }
         }
     }

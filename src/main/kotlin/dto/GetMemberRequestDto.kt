@@ -1,5 +1,5 @@
 package com.sudosoo.takeItEasyAdmin.dto
 
-class GetMemberRequestDto (var memberId : Long){
+class GetMemberRequestDto (val targetMethod : String = "validateMemberId" ,var memberId : Long){
 
 }
