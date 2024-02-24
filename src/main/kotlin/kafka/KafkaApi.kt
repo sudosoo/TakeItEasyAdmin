@@ -1,12 +1,13 @@
 package com.sudosoo.takeItEasyAdmin.kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.sudosoo.takeItEasyAdmin.dto.CreatePostByResponseDto
+import com.sudosoo.takeItEasyAdmin.dto.KafkaGetMemberDetailByMemberIdResponseDto
 import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
 import com.sudosoo.takeItEasyAdmin.service.MemberService
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.stereotype.Component
 
 
@@ -18,27 +19,17 @@ class KafkaApi(
     val objectMapper : ObjectMapper,
     val memberService: MemberService
 ) {
-    fun sendMember(createPostByResponseDto: CreatePostByResponseDto) {
-        kafkaTemplate.send(kafkaRestApiTopic, createPostByResponseDto)
+    fun sendMember(kafkaGetMemberDetailByMemberIdResponseDto: KafkaGetMemberDetailByMemberIdResponseDto) {
+        kafkaTemplate.send(kafkaRestApiTopic, kafkaGetMemberDetailByMemberIdResponseDto)
     }
 
-    @KafkaListener(topics = ["\${devsoo.kafka.restapi.topic}"], groupId = "member-consumer")
-    fun getMemberRequestDto(message: String) {
-
+    @SendTo
+    @KafkaListener(topics = ["\${devsoo.kafka.restapi.topic}"],groupId = "member-server-consumer-group")
+    @Throws(InterruptedException::class)
+    fun getMemberRequestDto(message: String): KafkaGetMemberDetailByMemberIdResponseDto? {
         val getMemberRequestDto: GetMemberRequestDto = objectMapper.readValue(message, GetMemberRequestDto::class.java)
-
-        when (getMemberRequestDto.targetMethod) {
-            "validateMemberId" -> {
-                val member = memberService.getInstance(getMemberRequestDto)
-                val responseDto = member.id?.let { CreatePostByResponseDto(it,member.memberName) }
-                    ?: throw IllegalStateException("Failed to create responseDto")
-                sendMember(responseDto)
-            }
-            else -> {
-                throw IllegalStateException("target is null")
-            }
-        }
+        val member = memberService.getInstance(getMemberRequestDto)
+        return member.toKafkaResponseDto()
     }
-
 
 }

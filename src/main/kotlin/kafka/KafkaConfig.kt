@@ -40,7 +40,9 @@ class KafkaConfig {
         props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
         props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = JsonDeserializer::class.java
         props[JsonDeserializer.TRUSTED_PACKAGES] = "*"
+        props[ConsumerConfig.GROUP_ID_CONFIG] = "member-server-consumer-group"
         return DefaultKafkaConsumerFactory(props)
+
     }
 
     @Bean
