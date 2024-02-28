@@ -22,9 +22,7 @@ import java.time.Duration
 @Configuration
 class KafkaConfig (
     @Value("\${spring.kafka.bootstrap-servers}")
-    val bootstrapAddress: String,
-    @Value("\${devsoo.kafka.restapi.topic}")
-    val requestReplyTopic: String
+    val bootstrapAddress: String
 ) {
 
     @Bean
