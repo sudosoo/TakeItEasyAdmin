@@ -1,7 +1,7 @@
 package com.sudosoo.takeItEasyAdmin.controller
 
 import com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
-import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
+import com.sudosoo.takeItEasyAdmin.dto.KafkaMemberValidateRequestDto
 import com.sudosoo.takeItEasyAdmin.service.MemberService
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -16,7 +16,7 @@ class MemberController (private val memberService : MemberService) {
         return ResponseEntity.ok().build()
     }
     @GetMapping(value = ["/get"], name = "getMember")
-    fun getMember(@RequestBody requestDto : GetMemberRequestDto) {
+    fun getMember(@RequestBody requestDto : KafkaMemberValidateRequestDto) {
         memberService.getInstance(requestDto)
     }
 

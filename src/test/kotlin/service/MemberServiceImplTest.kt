@@ -1,7 +1,8 @@
 package service
 
 import com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
-import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
+import com.sudosoo.takeItEasyAdmin.dto.KafkaGetMemberDetailByMemberIdResponseDto
+import com.sudosoo.takeItEasyAdmin.dto.KafkaMemberValidateRequestDto
 import com.sudosoo.takeItEasyAdmin.entity.Member
 import com.sudosoo.takeItEasyAdmin.repository.MemberRepository
 import com.sudosoo.takeItEasyAdmin.service.MemberService
@@ -41,7 +42,7 @@ class MemberServiceImplTest {
     @DisplayName("getMember")
     fun getInstance() {
         //given
-        val requestDto = GetMemberRequestDto(1L)
+        val requestDto = KafkaMemberValidateRequestDto(1L)
         every { memberRepository.findById(requestDto.memberId) } returns Optional.of(member)
 
         //when

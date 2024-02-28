@@ -1,12 +1,11 @@
 package com.sudosoo.takeItEasyAdmin.service
 
 import com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
-import com.sudosoo.takeItEasyAdmin.dto.GetMemberRequestDto
+import com.sudosoo.takeItEasyAdmin.dto.KafkaMemberValidateRequestDto
 import com.sudosoo.takeItEasyAdmin.entity.Member
 import com.sudosoo.takeItEasyAdmin.repository.MemberRepository
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
-import java.lang.IllegalArgumentException
 
 @Service
 @Transactional
@@ -20,7 +19,7 @@ class MemberServiceImpl (
         return memberRepository.save(Member.of(createMemberRequestDto))
     }
 
-    override fun getInstance(getRequestDto: GetMemberRequestDto) : Member {
+    override fun getInstance(getRequestDto: KafkaMemberValidateRequestDto) : Member {
         return memberRepository.findById(getRequestDto.memberId).orElseThrow{ NoSuchElementException(" 멤버를 찾을 수 없습니다.") }
         }
 
@@ -29,15 +28,5 @@ class MemberServiceImpl (
         member.disableMember()
         memberRepository.save(member)
     }
-
-//
-//    override fun getMemberByMemberName(memberName: String): Member {
-//        return memberRepository.findByMemberName(memberName).orElseThrow{ NoSuchElementException("멤버를 찾을 수 없습니다.")}
-//    }
-//
-//    override fun findAllMembers(): List<Member> {
-//        return memberRepository.findAll()
-//    }
-//
 }
 

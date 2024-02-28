@@ -24,6 +24,7 @@ data class Member( var memberName: String , var isDeleted: Boolean = false) {
     fun toKafkaResponseDto(): KafkaGetMemberDetailByMemberIdResponseDto? {
         return id?.let { KafkaGetMemberDetailByMemberIdResponseDto(it, memberName) }
     }
+
     fun disableMember() {
         isDeleted = true
     }

@@ -27,8 +27,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
+
     //로그 의존성
-    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    implementation ("io.github.microutils:kotlin-logging:3.0.5")
 
     //Spring Data 의존성
     implementation("org.springframework.data:spring-data-envers")
