@@ -1,13 +1,14 @@
 package service
 
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.dto.KafkaGetMemberDetailByMemberIdResponseDto
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.dto.KafkaMemberValidateRequestDto
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.entity.Member
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.repository.MemberRepository
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.service.MemberService
-import com.sudosoo.takeItEasyAdmin.com.sudosoo.takeItEasyAdmin.service.MemberServiceImpl
-import io.mockk.*
+import com.sudosoo.takeItEasyAdmin.dto.CreateMemberRequestDto
+import com.sudosoo.takeItEasyAdmin.dto.KafkaMemberValidateRequestDto
+import com.sudosoo.takeItEasyAdmin.entity.Member
+import com.sudosoo.takeItEasyAdmin.repository.MemberRepository
+import com.sudosoo.takeItEasyAdmin.service.MemberService
+import com.sudosoo.takeItEasyAdmin.service.MemberServiceImpl
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
