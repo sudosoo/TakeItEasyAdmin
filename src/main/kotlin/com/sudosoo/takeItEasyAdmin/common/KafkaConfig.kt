@@ -1,4 +1,4 @@
-package com.sudosoo.takeItEasyAdmin.kafka
+package com.sudosoo.takeItEasyAdmin.common
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerConfig
@@ -11,13 +11,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory
 import org.springframework.kafka.config.KafkaListenerContainerFactory
 import org.springframework.kafka.core.*
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer
-import org.springframework.kafka.listener.ContainerProperties
-import org.springframework.kafka.listener.KafkaMessageListenerContainer
-import org.springframework.kafka.requestreply.ReplyingKafkaTemplate
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-import org.springframework.kafka.support.serializer.JsonDeserializer
-import org.springframework.kafka.support.serializer.JsonSerializer
-import java.time.Duration
 
 @Configuration
 class KafkaConfig (

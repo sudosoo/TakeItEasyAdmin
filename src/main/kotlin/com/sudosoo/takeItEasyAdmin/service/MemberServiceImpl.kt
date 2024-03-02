@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service
 
 @Service
 @Transactional
-class MemberServiceImpl (
-    private val memberRepository : MemberRepository ):MemberService {
+class MemberServiceImpl ( val memberRepository : MemberRepository): MemberService {
 
     override fun create(createMemberRequestDto: CreateMemberRequestDto): Member {
         if (memberRepository.existsByMemberName(createMemberRequestDto.memberName)) {
@@ -19,8 +18,8 @@ class MemberServiceImpl (
         return memberRepository.save(Member.of(createMemberRequestDto))
     }
 
-    override fun getInstance(getRequestDto: KafkaMemberValidateRequestDto) : Member {
-        return memberRepository.findById(getRequestDto.memberId).orElseThrow{ NoSuchElementException(" 멤버를 찾을 수 없습니다.") }
+    override fun getInstance(requestDto: KafkaMemberValidateRequestDto) : Member {
+        return memberRepository.findById(requestDto.memberId).orElseThrow{ NoSuchElementException(" 멤버를 찾을 수 없습니다.") }
         }
 
     override fun disableByMemberId(memberId: Long) {

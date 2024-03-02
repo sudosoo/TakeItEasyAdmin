@@ -26,7 +26,5 @@ class MemberController (private val memberService : MemberService) {
     }
 
 
-
-
 }
 

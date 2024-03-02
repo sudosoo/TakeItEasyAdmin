@@ -21,19 +21,16 @@ dependencies {
     testImplementation("org.junit.jupiter", "junit-jupiter", "5.6.2")
     testImplementation("io.mockk:mockk:1.12.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-
-    //로그 의존성
+    implementation("org.springframework.data:spring-data-envers")
     implementation ("io.github.microutils:kotlin-logging:3.0.5")
 
-    //Spring Data 의존성
-    implementation("org.springframework.data:spring-data-envers")
-
+    //redis
+    implementation ("org.springframework.boot:spring-boot-starter-data-redis")
 
     //kafka
     implementation ("org.springframework.kafka:spring-kafka")
