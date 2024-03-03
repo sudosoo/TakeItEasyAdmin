@@ -7,6 +7,6 @@ import java.util.*
 
 interface MemberRepository : JpaRepository<Member,Long> {
     fun findByMemberName(memberName:String): Optional<Member>
-    fun existByMemberName(memberName:String):Boolean
+    fun existsByMemberName(memberName:String):Boolean
 
 }
