@@ -14,8 +14,14 @@ MemberInfo : https://github.com/sudosoo/TakeItEasyAdmin/
 - Dependency Management: io.spring.dependency-management 1.1.3
 
 ### Event Sourcing
-- Spring-kafka
+- Kafka
 
+### Log & Search
+- ELK Stack + filebeat
+
+### Global cache
+- Redis
+  
 ### Libraries
 - Spring Boot 3.0.1
 - Spring Boot Starter Data JPA
@@ -23,6 +29,7 @@ MemberInfo : https://github.com/sudosoo/TakeItEasyAdmin/
 - Spring Boot Starter Validation
 - Spring Boot DevTools
 - Spring Boot Starter Test
+- Spring Boot starter data Redis
 - H3 JDBC Driver 2.4.0
 - Spring RestDocs MockMvc
 - Mockk 1.12.5
