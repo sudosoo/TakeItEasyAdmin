@@ -1,4 +1,4 @@
-package com.sudosoo.takeItEasyAdmin.common
+package com.sudosoo.takeItEasyAdmin.common.config
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerConfig
